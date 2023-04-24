@@ -1,0 +1,24 @@
+import icons from 'url:../../img/icons.svg';
+
+class SearchView {
+  _parentElement = document.querySelector('.search');
+
+  getQuery() {
+    const inputValue =
+      this._parentElement.querySelector('.search__field').value;
+    this._clearInput();
+    return inputValue;
+  }
+
+  _clearInput() {
+    this._parentElement.querySelector('.search__field').value = '';
+  }
+  addHandlerSearch(handler) {
+    this._parentElement.addEventListener('submit', function (e) {
+      e.preventDefault();
+      handler();
+    });
+  }
+}
+
+export default new SearchView();
