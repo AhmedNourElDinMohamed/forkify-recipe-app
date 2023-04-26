@@ -120,7 +120,6 @@ const cleareBookmarks = function () {
 
 export const upoloadRecipe = async function (newRecipe) {
   try {
-    console.log(Object.entries(newRecipe));
     const ingredients = Object.entries(newRecipe)
       .filter(entry => entry[0].startsWith('ingredient') && entry[1] !== '')
       .map(ing => {
@@ -136,8 +135,6 @@ export const upoloadRecipe = async function (newRecipe) {
         return { quantity: quantity ? +quantity : null, unit, description };
       });
 
-    console.log(ingredients);
-
     const recipe = {
       title: newRecipe.title,
       source_url: newRecipe.sourceUrl,
@@ -148,12 +145,9 @@ export const upoloadRecipe = async function (newRecipe) {
       ingredients,
     };
 
-    console.log(recipe);
-
     const data = await AJAX(`${API_URL}/?key=${KEY}`, recipe);
     state.recipe = createRecipeObject(data);
     addBookMark(state.recipe);
-    console.log(data);
   } catch (error) {
     throw error;
   }
